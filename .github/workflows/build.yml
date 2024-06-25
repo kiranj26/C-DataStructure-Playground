@@ -1,0 +1,21 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install build dependencies
+      run: sudo apt-get install build-essential
+
+    - name: Build with Makefile
+      run: make
+
+    - name: Run Tests
+      run: |
+        find . -type f -executable -exec {} \;
